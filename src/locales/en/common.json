@@ -1,0 +1,17 @@
+{
+  "nav": {
+    "home": "Home",
+    "instructions": "Instructions",
+    "diagnostics": "Diagnostics",
+    "about": "About",
+    "login": "Login",
+    "signup": "Sign Up",
+    "slogan": "SKIN DISEASE CLASSIFICATION USING EXPLAINABLE AI",
+    "language": "Language"
+  },
+  "mainHero": {
+    "subtitle": "Skin disease classification using explainable AI",
+    "description": "Upload a photo of the affected skin and the system will not only identify the type of disease but also provide a clear explanation of the result",
+    "tryButton": "Try Now"
+  }
+}
