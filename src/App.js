@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles';
+import { I18nextProvider } from 'react-i18next';
+import Navbar from './components/Navbar/Navbar';
+
+import CssBaseline from '@mui/material/CssBaseline';
+import theme from './styles/theme';
+import i18n from './utils/i18n';
+import './styles/variables.css';
+import HomePage from './pages/HomePage';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <I18nextProvider i18n={i18n}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage/>} />
+        </Routes>
+      </ThemeProvider>
+    </I18nextProvider>
   );
 }
 
