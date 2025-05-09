@@ -13,5 +13,14 @@
     "subtitle": "Skin disease classification using explainable AI",
     "description": "Upload a photo of the affected skin and the system will not only identify the type of disease but also provide a clear explanation of the result",
     "tryButton": "Try Now"
+  },
+  "instructionSteps": {
+    "title": "How does it work?",
+    "upload": "Upload a skin photo",
+    "uploadDesc": "Take a clear photo of the affected skin area and upload it to the system.",
+    "analysis": "Get a diagnosis",
+    "analysisDesc": "The system will analyze the image and predict the most likely skin condition among 7 possible classes.",
+    "results": "View explanations",
+    "resultsDesc": "Choose one of the explainable AI methods to see which areas of the image the model focused on."
   }
 }

@@ -25,7 +25,7 @@ const MainHero = () => {
   const [showFullImage, setShowFullImage] = useState(true);
 
   useEffect(() => {
-    const displayDuration = 3000; // 3 секунди показу
+    const displayDuration = 4000;
     const interval = setInterval(() => {
       setShowFullImage(prev => {
         if (prev) {
