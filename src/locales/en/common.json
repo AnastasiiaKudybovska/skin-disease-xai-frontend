@@ -22,5 +22,22 @@
     "analysisDesc": "The system will analyze the image and predict the most likely skin condition among 7 possible classes.",
     "results": "View explanations",
     "resultsDesc": "Choose one of the explainable AI methods to see which areas of the image the model focused on."
+  },
+  "features": {
+  "mainTitle": "Why ",
+  "autoClassification": "Automatic Disease Classification",
+  "autoClassificationDesc": "Our system automatically detects one of seven types of dermatological diseases from a skin image. Simply upload an image and receive a preliminary diagnosis.",
+  "xai": "Explainable AI for Result Interpretation",
+  "xaiDesc": "We don’t just provide an answer — we explain it. Choose any explainable AI method such as Grad-CAM, LIME, SHAP, or Integrated Gradients to understand why the model made a specific decision.",
+  "history": "Diagnosis History for Registered Users",
+  "historyDesc": "Save your results in your personal account and revisit them at any time.",
+  "noRegistration": "Quick Access Without Registration",
+  "noRegistrationDesc": "We value your time — that’s why core features are available even without creating an account.",
+  "responsive": "Responsive Interface",
+  "responsiveDesc": "A user-friendly interface on any device. No complexity — just convenience."
+  },
+  "warning": {
+    "title": "Important Notice",
+    "description": "Our system provides only preliminary disease classification based on AI. Results do not replace doctor consultation. For accurate diagnosis, please consult a dermatologist."
   }
 }
