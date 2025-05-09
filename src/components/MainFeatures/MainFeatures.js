@@ -42,7 +42,7 @@ const MainFeatures = () => {
   ];
 
   return (
-    <Box sx={{ maxWidth: 800, mx: 'auto', p: 6,}}>
+    <Box sx={{ p: 6, display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
     <Typography variant="h3"
         sx={{
             mb: 4, textAlign: 'center',
@@ -55,7 +55,7 @@ const MainFeatures = () => {
         {t('features.mainTitle')}
         <Box sx={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                mt: { xs: 2, sm: 0 }, ml: { xs: 0, sm: 2 }, 
+                mt: { xs: 2, sm: 0 }, ml: { xs: 0, sm: 2 },    flexWrap: 'wrap',
          }}>
             <Box component="img" src="/images/logo_light.png" alt="Logo" sx={{ height: { xs: 80, md: 90 }, mr: 2 }} />
             <Box component="span" sx={{ color: 'var(--primary-color)', fontWeight: 400, fontFamily: '"Frank Ruhl Libre", serif' }}>Skin</Box>
@@ -65,7 +65,7 @@ const MainFeatures = () => {
         </Box>
     </Typography>
 
-    <Box sx={{ mb: 2 }}>
+    <Box sx={{ mb: 2 , maxWidth: 800, }}>
         {features.map((feature, index) => (
           <FeatureItem 
             key={index}

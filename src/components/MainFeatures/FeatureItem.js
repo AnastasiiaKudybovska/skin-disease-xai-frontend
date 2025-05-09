@@ -44,11 +44,13 @@ const FeatureItem = ({ icon, title, description, index }) => {
           <Typography variant="h5" sx={{ 
             fontWeight: 600, mb: 1, 
             color: index % 2 === 0 ? 'var(--dark-primary-color)' : 'var(--dark-bg-color)',
-            fontFamily: '"Inter", sans-serif',
+            fontFamily: '"Inter", sans-serif',  
           }}>
             {title}
           </Typography>
-          <Typography variant="body1" sx={{ color: 'var(--grey-text-color)',   fontFamily: '"Raleway", sans-serif',
+          <Typography variant="body1" sx={{ 
+            color: 'var(--grey-text-color)',   
+            fontFamily: '"Raleway", sans-serif',
             lineHeight: 1.6}}>
             {description}
           </Typography>

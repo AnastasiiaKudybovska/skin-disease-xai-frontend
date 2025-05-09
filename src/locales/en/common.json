@@ -39,5 +39,62 @@
   "warning": {
     "title": "Important Notice",
     "description": "Our system provides only preliminary disease classification based on AI. Results do not replace doctor consultation. For accurate diagnosis, please consult a dermatologist."
+  },
+  "diseases": {
+    "carousel": {
+      "title": "Types of Skin Diseases"
+    },
+    "common": {
+      "symptoms": "Symptoms",
+      "treatment": "Treatment"
+    },
+    "akiec": {
+      "name": "Actinic Keratosis",
+      "description": "Precancerous skin lesions caused by prolonged sun exposure.",
+      "symptoms": "Rough, scaly patches on sun-exposed areas, often pink or red.",
+      "treatment": "Cryotherapy, topical medications, photodynamic therapy, or surgical removal."
+    },
+    "bcc": {
+      "name": "Basal Cell Carcinoma",
+      "description": "A common form of skin cancer that grows slowly.",
+      "symptoms": "Pearly or waxy bump, flat firm lesion, or brown scar-like area.",
+      "treatment": "Surgical excision, Mohs surgery, cryotherapy, or radiation therapy."
+    },
+    "bkl": {
+      "name": "Benign Keratosis",
+      "description": "Non-cancerous skin growths often associated with aging or sun exposure.",
+      "symptoms": "Brown, black, or light tan lesions with a waxy or scaly texture.",
+      "treatment": "Typically no treatment needed, but can be removed via cryotherapy or curettage if bothersome."
+    },
+    "df": {
+      "name": "Dermatofibroma",
+      "description": "Benign fibrous nodules commonly found on the legs.",
+      "symptoms": "Small, firm, red-brown bumps that may dimple when pinched.",
+      "treatment": "Usually no treatment required, but can be surgically removed if symptomatic."
+    },
+    "mel": {
+      "name": "Melanoma",
+      "description": "A dangerous type of skin cancer that develops from melanocytes.",
+      "symptoms": "A new spot or an existing mole that changes in size, shape, or color.",
+      "treatment": "Surgical removal, immunotherapy, targeted therapy, radiation therapy, or chemotherapy."
+    },
+    "nv": {
+      "name": "Melanocytic Nevi",
+      "description": "Commonly known as moles, formed by clusters of pigment cells.",
+      "symptoms": "Small dark brown spots caused by clusters of pigment-producing cells.",
+      "treatment": "Generally no treatment needed, but suspicious moles should be evaluated by a doctor."
+    },
+    "vasc": {
+      "name": "Vascular Lesions",
+      "description": "Lesions formed by abnormal blood vessels.",
+      "symptoms": "Red or purple marks on the skin, which may be flat or raised.",
+      "treatment": "Laser therapy, surgical intervention, or medications depending on the type."
+    }
+  },
+  "footer": {
+    "description": "Advanced AI-powered skin disease detection system",
+    "navigation": "Navigation",
+    "contact": "Contact Us",
+    "copyright": "© 2025 SkinInsight AI. All rights reserved."
   }
 }

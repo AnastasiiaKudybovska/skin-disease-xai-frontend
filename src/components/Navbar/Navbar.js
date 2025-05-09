@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { AppBar, Toolbar, Typography, Box, IconButton, Menu, MenuItem, useMediaQuery, useTheme, Avatar } from '@mui/material';
+import { AppBar, Toolbar, Typography, Box, IconButton, Menu, MenuItem, useMediaQuery, useTheme, Avatar, Link } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import LanguageIcon from '@mui/icons-material/Language';
 import CloseIcon from '@mui/icons-material/Close';
@@ -26,7 +26,7 @@ const Navbar = () => {
 
   const navItems = [
     { name: t('nav.home'), path: '/' },
-    { name: t('nav.instructions'), path: '/instructions' },
+    { name: t('nav.instructions'), path: '#instructions' },
     { name: t('nav.diagnostics'), path: '/diagnostics' },
     { name: t('nav.about'), path: '/about' }
   ];
@@ -38,6 +38,7 @@ const Navbar = () => {
   return (
     <AppBar position="fixed" className="navbar-container">
       <Toolbar sx={{ justifyContent: 'space-between' }}>
+      <Link href="/" sx={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
         <Box 
           sx={{ display: 'flex', alignItems: 'center' }}
           onMouseEnter={() => setShowSlogan(true)}
@@ -57,7 +58,7 @@ const Navbar = () => {
                 lineHeight: 1, 
                 whiteSpace: 'nowrap',
                 transform: showSlogan ? 'translateY(-4px)' : 'translateY(0)',
-                transition: 'transform 0.3s ease-in-out' 
+                transition: 'transform 0.3s ease-in-out'
               }}
             >
               <span className='logo-text-part-1'>Skin</span>
@@ -80,6 +81,7 @@ const Navbar = () => {
             )}
           </Box>
         </Box>
+      </Link>
         {!isMobile ? (
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             {navItems.map((item) => (
