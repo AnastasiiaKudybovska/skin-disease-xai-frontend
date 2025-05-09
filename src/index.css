@@ -16,3 +16,7 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+section {
+  scroll-margin-top: 80px; /* Висота вашого Navbar */
+}

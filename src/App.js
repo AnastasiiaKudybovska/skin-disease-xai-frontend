@@ -9,6 +9,7 @@ import theme from './styles/theme';
 import i18n from './utils/i18n';
 import './styles/variables.css';
 import HomePage from './pages/HomePage';
+import Footer from './components/Footer/Footer';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage/>} />
         </Routes>
+        <Footer />
       </ThemeProvider>
     </I18nextProvider>
   );

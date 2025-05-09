@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, Button, useMediaQuery } from '@mui/material';
+import { Box, Typography, Button, useMediaQuery, Link } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { useTranslation } from 'react-i18next';
 
@@ -25,7 +25,7 @@ const MainHero = () => {
   const [showFullImage, setShowFullImage] = useState(true);
 
   useEffect(() => {
-    const displayDuration = 3000; // 3 секунди показу
+    const displayDuration = 4000;
     const interval = setInterval(() => {
       setShowFullImage(prev => {
         if (prev) {
@@ -85,23 +85,33 @@ const MainHero = () => {
         </Typography>
         
         <Box sx={{ display: 'flex', justifyContent: isMobile ? 'center' : 'flex-start' }}>
-            <Button 
-                variant="contained" size={isMobile ? 'medium' : 'large'}
-                sx={{
-                    width: isMobile ? '160px' : '200px', py: isMobile ? 1.5 : 2,
-                    borderRadius: '25px', textTransform: 'none',
-                    fontWeight: 600, fontSize: isMobile ? '0.9rem' : '1rem',
-                    backgroundColor: 'var(--primary-color)', color: 'var(--white-color)',
-                    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', transition: 'all 0.3s ease',
-                    '&:hover': {
-                        backgroundColor: 'var(--dark-primary-color)',
-                        boxShadow: 'inset 0 0 10px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.3)',
-                    },
-                    '&:active': { boxShadow: 'inset 0 0 15px rgba(0, 0, 0, 0.3)', }
-                }}
-                >
-                {t('mainHero.tryButton')}
-            </Button>
+        <Button
+          variant="contained" 
+          size={isMobile ? 'medium' : 'large'}
+          sx={{
+            width: isMobile ? '160px' : '200px', 
+            py: isMobile ? 1.5 : 2,
+            borderRadius: '25px', 
+            textTransform: 'none',
+            fontWeight: 600, 
+            fontSize: isMobile ? '0.9rem' : '1rem',
+            backgroundColor: 'var(--primary-color)', 
+            color: 'var(--white-color)',
+            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', 
+            transition: 'all 0.3s ease',
+            '&:hover': {
+              backgroundColor: 'var(--dark-primary-color)',
+              boxShadow: 'inset 0 0 10px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.3)',
+            },
+            '&:active': { 
+              boxShadow: 'inset 0 0 15px rgba(0, 0, 0, 0.3)',
+            }
+          }}
+          component={Link}
+          href="/diagnostics"
+        >
+          {t('mainHero.tryButton')}
+        </Button>
         </Box>
       </Box>
 
@@ -111,7 +121,7 @@ const MainHero = () => {
         '&::before': {
           content: '""', position: 'absolute', pointerEvents: 'none',
           top: 0, left: 0, right: 0, bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.4)', zIndex: 3,
+          backgroundColor: 'rgba(0, 0, 0, 0.2)', zIndex: 3,
         }
       }}>
         <Box sx={{
