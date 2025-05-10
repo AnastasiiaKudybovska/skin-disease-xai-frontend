@@ -17,7 +17,7 @@ const RegisterPage = () => {
         minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
-        pt: { xs: 4, md: 0 },
+        pt: 6,
         background: {
           xs: 'linear-gradient(135deg, var(--white-color) 70%, white 30%)',
           md: 'linear-gradient(to right, var(--white-color) 80%, white 20%)',
