@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import WarningIcon from '@mui/icons-material/Warning'; 
 
 const WarningBlock = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('home');
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
 

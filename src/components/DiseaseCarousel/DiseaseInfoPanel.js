@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { diseaseColors } from '../../utils/constants';
 
 const DiseaseInfoPanel = ({ activeDisease, hovered }) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('home');
 
   return (
     <Box sx={{ 
