@@ -1,0 +1,25 @@
+{
+  "personal_info": "Personal information",
+  "full_name": "Full name",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "username": "Username",
+  "email": "Email",
+  "date_of_birth": "Date of Birth",  
+  "diagnosis_history": "Diagnosis history",
+  "edit": "Edit Account",
+  "cancel": "Cancel",
+  "save": "Save",
+  "delete_account": "Delete Account",
+  "confirm_delete": "Confirm Deletion",
+  "delete_warning": "Are you sure you want to delete your account? This action cannot be undone.",
+  "confirm": "Confirm",
+  "loading": "Loading profile...",
+  "error_age_restriction": "You must be at least 13 years old",
+  "profile_updated": "Profile updated successfully",
+  "account_deleted": "Account deleted successfully",
+  "failed_to_load_profile": "Failed to load profile",
+  "failed_to_update_profile": "Failed to update profile",
+  "failed_to_delete_account": "Failed to delete account"
+  
+}

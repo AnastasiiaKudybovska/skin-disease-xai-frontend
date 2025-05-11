@@ -128,7 +128,6 @@ export const useAuth = () => {
     } catch (error) {
       const errorKey = handleApiError(error);
       if (errorKey === 'invalid_token') {
-        // Якщо токен недійсний, просто очистити локальні дані
         setUser(null);
         clearTokens();
         navigate('/login');
