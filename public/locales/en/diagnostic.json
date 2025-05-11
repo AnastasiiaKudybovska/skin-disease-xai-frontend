@@ -1,0 +1,20 @@
+{
+  "title": "Skin Condition Diagnosis",
+  "selectImage": "Select Image",
+  "backButton": "Back",
+  "nextButton": "Continue",
+  "resetButton": "Start Over",
+  "reupload": "Reupload Image",
+  "instructionSteps": {
+    "upload": "Upload a skin photo",
+    "uploadDesc": "Take a clear photo of the affected skin area and upload it to the system. You can drag and drop your image here.",
+    "analysis": "Get a diagnosis",
+    "analysisDesc": "The system will analyze the image and predict the most likely skin condition among 7 possible classes.",
+    "results": "View explanations",
+    "resultsDesc": "Choose one of the explainable AI methods to see which areas of the image the model focused on."
+  },
+  "notAuthTitle": "Log In for a Better Experience",
+  "notAuthDesc": "You don’t need to log in to continue. However, signing in lets you keep track of your requests and access more features.",
+  "logIn": "Log In",
+  "continueWithoutLogin": "Continue Without logIn"
+}
