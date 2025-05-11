@@ -13,7 +13,7 @@ import Footer from './components/Footer/Footer';
 import DiagnosticPage from './pages/DiagnosticPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-
+import { SnackbarProvider } from 'notistack';
 
 function App() {
   const location = useLocation(); 
@@ -22,6 +22,18 @@ function App() {
   return (
     <I18nextProvider i18n={i18n}>
       <ThemeProvider theme={theme}>
+      <SnackbarProvider
+        maxSnack={3}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        classes={{
+          variantSuccess: 'success-snackbar',
+          variantError: 'error-snackbar',
+          variantWarning: 'warning-snackbar',
+        }}
+      >
         <CssBaseline />
         <Navbar />
         <Routes>
@@ -31,6 +43,7 @@ function App() {
           <Route path="/signup" element={<RegisterPage/>} />
         </Routes>
       {(pathname === '/login' || '/signup') ? null : <Footer />}
+          </SnackbarProvider>
       </ThemeProvider>
     </I18nextProvider>
   );

@@ -1,16 +1,22 @@
 import React from 'react';
 import { Container, Box, Typography, Paper } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import AuthForm from '../components/AuthForm/AuthForm';
 import { motion } from 'framer-motion';
+import { useAuth } from '../hooks/useAuth';
+import AuthForm from '../components/AuthForm/AuthForm';
 
 const RegisterPage = () => {
   const { t } = useTranslation('auth');
+  const { register } = useAuth();
 
-  const handleSubmit = async (credentials) => {
-    console.log('Register data:', credentials);
+  const handleSubmit = async (formData) => {
+    try {
+      await register(formData);
+    } catch (error) {
+      console.error('Registration error:', error);
+    }
   };
-
+  
   return (
     <Box
       sx={{

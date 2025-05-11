@@ -3,13 +3,20 @@ import { Container, Box, Typography, Paper } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import AuthForm from '../components/AuthForm/AuthForm';
 import { motion } from 'framer-motion';
+import { useAuth } from '../hooks/useAuth';
 
 const LoginPage = () => {
   const { t } = useTranslation('auth');
-
-  const handleSubmit = async (credentials) => {
-    console.log('Login data:', credentials);
-  };
+   const { login } = useAuth();
+ 
+   const handleSubmit = async (formData) => {
+     try {
+       await login(formData);
+     } catch (error) {
+       console.error('Login error:', error);
+     }
+   };
+   
 
   return (
     <Box
