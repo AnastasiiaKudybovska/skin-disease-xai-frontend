@@ -15,6 +15,7 @@ const InputField = ({
   setShowPassword,
   isPasswordField,
   delay,
+  disabled = false
 }) => {
   const inputProps = isPasswordField
     ? {
@@ -45,6 +46,7 @@ const InputField = ({
         value={value}
         onChange={onChange}
         error={error}
+        disabled={disabled}
         helperText={helperText}
         slotProps={{
           input: inputProps,
