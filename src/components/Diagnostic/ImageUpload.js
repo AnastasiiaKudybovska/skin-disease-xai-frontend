@@ -1,19 +1,23 @@
 import React, { useState, useCallback } from 'react';
-import { Box, Button, Typography, IconButton } from '@mui/material';
+import { Box, Button, Typography, IconButton, CircularProgress } from '@mui/material';
 import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import NotAuthenticatedDialog from '../Modals/NotAuthenticatedDialog';
 import { motion } from 'framer-motion';
 import { useAuth } from '../../hooks/useAuth';
+import { diagnosticService } from '../../services/diagnosticService';
+import useStyledSnackbar from '../../hooks/useStyledSnackbar';
 
-const ImageUpload = ({ onNext, setImage }) => {
+const ImageUpload = ({ onNext, setImage, initialImage, setAnalysisResults }) => {
   const { t } = useTranslation('diagnostic');
-  const [preview, setPreview] = useState(null);
+  const { showError } = useStyledSnackbar();
+  const [preview, setPreview] = useState(initialImage ? URL.createObjectURL(initialImage) : null);
   const [hoverPreview, setHoverPreview] = useState(false);
   const { isAuthenticated } = useAuth();
   const [showDialog, setShowDialog] = useState(false);
   const [skipAuth, setSkipAuth] = useState(false);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
 
   const handleFileSelection = (file) => {
     if (file) {
@@ -44,7 +48,6 @@ const ImageUpload = ({ onNext, setImage }) => {
       setShowDialog(true);
       return;
     }
-    // Програмно відкриваємо файловий діалог
     document.getElementById('file-input').click();
   };
 
@@ -64,6 +67,37 @@ const ImageUpload = ({ onNext, setImage }) => {
     setSkipAuth(true);
     setShowDialog(false);
     document.getElementById('file-input').click();
+  };
+
+  const handleNextClick = async () => {
+    if (!initialImage) return;
+    
+    try {
+      setIsAnalyzing(true);
+      const response = await diagnosticService.classifyImage(initialImage);
+      
+      if (response.error) {
+        showError(t('analysis_failed'));
+        setAnalysisResults({
+          ...response,
+          isError: true
+        });
+      } else {
+        setAnalysisResults(response);
+      }
+      
+      onNext();
+    } catch (error) {
+      console.error('Analysis failed:', error);
+      showError(t('analysis_failed'));
+      setAnalysisResults({
+        isError: true,
+        error: error.message || 'Analysis failed'
+      });
+      onNext();
+    } finally {
+      setIsAnalyzing(false);
+    }
   };
 
   return (
@@ -91,7 +125,6 @@ const ImageUpload = ({ onNext, setImage }) => {
           }
         }}
       >
-        {/* Прихований input для файлів */}
         <input 
           id="file-input"
           type="file" 
@@ -115,7 +148,7 @@ const ImageUpload = ({ onNext, setImage }) => {
             </Typography>
             <Button 
               variant="contained" 
-              onClick={openFileDialog} // Обробник кліку для кнопки
+              onClick={openFileDialog}
               sx={{ 
                 mt: 2,  
                 px: 4, 
@@ -220,7 +253,8 @@ const ImageUpload = ({ onNext, setImage }) => {
           <Button
             variant="contained"
             size="large"
-            onClick={onNext}
+            onClick={handleNextClick}
+            disabled={isAnalyzing}
             sx={{ 
               mt: 4,  
               px: 4, 
@@ -238,10 +272,18 @@ const ImageUpload = ({ onNext, setImage }) => {
               },
               '&:active': { 
                 boxShadow: 'inset 0 0 15px rgba(0, 0, 0, 0.3)',
+              },
+              '&.Mui-disabled': {
+                bgcolor: 'var(--primary-light-color)',
+                color: 'var(--white-color)'
               }
             }}
           >
-            {t('nextButton')}
+            {isAnalyzing ? (
+              <CircularProgress size={24} sx={{ color: 'var(--primary-color)' }} />
+            ) : (
+              t('nextButton')
+            )}
           </Button>
         </motion.div>
       )}

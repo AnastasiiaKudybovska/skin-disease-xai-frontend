@@ -15,9 +15,9 @@ const useStyledSnackbar = () => {
       style: {
         fontFamily: '"Raleway", sans-serif',
         fontSize: '14px',
-        ...(options.variant === 'success' && { backgroundColor: 'var(--primary-color)' }),
-        ...(options.variant === 'error' && { backgroundColor: 'var(-error-color)' }),
-        ...(options.variant === 'warning' && { backgroundColor: '#ff9800' }),
+        ...(options.variant === 'success' && { backgroundColor: 'var(--primary-color) !important' }),
+        ...(options.variant === 'error' && { backgroundColor: 'var(-error-color) !important' }),
+        ...(options.variant === 'warning' && { backgroundColor: '#ff9800 !important' }),
       },
       ...options,
     });

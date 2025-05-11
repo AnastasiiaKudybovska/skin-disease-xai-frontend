@@ -12,7 +12,7 @@ import { styled } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom'; // Додано для навігації
+import { useNavigate } from 'react-router-dom'; 
 
 const StyledDialog = styled(Dialog)(() => ({
   '& .MuiBackdrop-root': {
@@ -80,16 +80,15 @@ const ActionButton = styled(Button)(() => ({
 
 const NotAuthenticatedDialog = ({ open, onClose, onContinue  }) => {
   const { t } = useTranslation('diagnostic');
-  const navigate = useNavigate(); // Хук для навігації
+  const navigate = useNavigate();
 
   const handleLogin = () => {
-    onClose(); // Закриваємо діалог
-    navigate('/login'); // Навігація на сторінку логіну
+    onClose();
+    navigate('/login'); 
   };
 
   const handleContinue = () => {
-    onClose(); // Просто закриваємо діалог
-    // Тут можна додати додаткову логіку для продовження без логіну
+    onClose(); 
   };
 
   return (
@@ -131,7 +130,10 @@ const NotAuthenticatedDialog = ({ open, onClose, onContinue  }) => {
               sx={{
                 backgroundColor: 'transparent',
                 color: 'var(--primary-color)',
-                border: '1px solid var(--primary-color)'
+                border: '1px solid var(--primary-color)',
+                 '&:hover': {
+                    color: 'var(--white-color)',
+                  },
               }}
             >
               {t('continueWithoutLogin')}

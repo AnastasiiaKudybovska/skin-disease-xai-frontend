@@ -16,5 +16,38 @@
   "notAuthTitle": "Log In for a Better Experience",
   "notAuthDesc": "You don’t need to log in to continue. However, signing in lets you keep track of your requests and access more features.",
   "logIn": "Log In",
-  "continueWithoutLogin": "Continue Without logIn"
+  "continueWithoutLogin": "Continue Without logIn",
+  "analysis_failed": "Image analysis failed. Please try again.",
+  "diseaseLabels": {
+    "vasc": "Vascular Lesion",
+    "akiec": "Actinic Keratosis",
+    "bcc": "Basal Cell Carcinoma",
+    "nv": "Melanocytic Nevus",
+    "mel": "Melanoma",
+    "df": "Dermatofibroma",
+    "bkl": "Benign Keratosis"
+  },
+  "analysisStep": {
+    "analysisResults": "Diagnosis Results", 
+    "uploadedImage": "Your Skin Image",
+    "filename": "Filename: ",
+    "viewXAIExplanation": "View XAI-based explanation",
+    "topProbabilities": "Probability Distribution",    
+    "confidence": "confidence",
+    "mostLikelyCondition": "This is the most likely condition based on our analysis.",
+    "note": "Note",
+    "disclaimer": "This analysis is for informational purposes only and should not replace professional medical advice.",
+    "no_results": "No results were obtained from the image analysis. Please try again.",
+    "unknown": "Unknown class",
+    "lowConfidenceTitle": "Low Confidence Results",
+    "lowConfidenceMessage": "We couldn't analyze your image with sufficient confidence. Please try again with a better quality image.",
+    "lowConfidenceError": "Analysis confidence is too low ",
+    "highestPredicted": "Highest predicted class",
+    "suggestionsTitle": "Suggestions",
+    "suggestion1": "Use better lighting",
+    "suggestion2": "Make sure the focus is clear",
+    "suggestion3": "Capture the affected area closer",
+    "tryAgainButton": "Try Again"
+  }
+  
 }
