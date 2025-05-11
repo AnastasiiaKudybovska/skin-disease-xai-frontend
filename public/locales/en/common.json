@@ -1,0 +1,21 @@
+{
+  "nav": {
+    "home": "Home",
+    "instructions": "Instructions",
+    "diagnostics": "Diagnostics",
+    "about": "About",
+    "login": "Login",
+    "signup": "Sign Up",
+    "slogan": "SKIN DISEASE CLASSIFICATION USING EXPLAINABLE AI",
+    "language": "Language",
+    "history": "History",
+    "profile": "Profile",
+    "logout": "Logout"
+  },
+  "footer": {
+    "description": "Advanced AI-powered skin disease detection system",
+    "navigation": "Navigation",
+    "contact": "Contact Us",
+    "copyright": "© 2025 SkinInsight AI. All rights reserved."
+  }
+}

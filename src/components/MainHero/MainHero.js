@@ -19,7 +19,7 @@ const smallImages = [
 const MainHero = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const { t } = useTranslation();
+  const { t } = useTranslation('home');
   const [currentFullImageIndex, setCurrentFullImageIndex] = useState(0);
   const [currentSmallImageIndex, setCurrentSmallImageIndex] = useState(0);
   const [showFullImage, setShowFullImage] = useState(true);
@@ -60,12 +60,12 @@ const MainHero = () => {
       }}>
         <Typography variant={isMobile ? 'h3' : 'h2'} sx={{
           fontFamily: '"Frank Ruhl Libre", serif',
+          color: 'var(--dark-text-color)',
           fontWeight: 700,
           mb: 3,
-          color: theme.palette.text.primary,
         }}>
             <Box component="span" sx={{ color: 'var(--primary-color)', fontWeight: 400 }}>Skin</Box>
-            <Box component="span" sx={{ color: 'var(--dark-bg-color)', fontWeight: 700 }}>Insight</Box>
+            <Box component="span" sx={{ color: 'var(--dark-text-color)', fontWeight: 700 }}>Insight</Box>
             <Box component="span" sx={{ color: 'var(--secondary-color)', fontWeight: 600 }}> AI</Box>
         </Typography>
         

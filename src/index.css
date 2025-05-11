@@ -18,5 +18,20 @@ a {
 }
 
 section {
-  scroll-margin-top: 80px; /* Висота вашого Navbar */
+  scroll-margin-top: 80px;
+}
+
+.success-snackbar {
+  background-color: var(--primary-color) !important;
+  font-family: 'Raleway', sans-serif !important;
+}
+
+.error-snackbar {
+  background-color: var(--error-color) !important;
+  font-family: 'Raleway', sans-serif !important;
+}
+
+.warning-snackbar {
+  background-color: #ff9800 !important;
+  font-family: 'Raleway', sans-serif !important;
 }

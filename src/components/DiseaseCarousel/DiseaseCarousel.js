@@ -6,7 +6,7 @@ import DiseaseInfoPanel from './DiseaseInfoPanel';
 import { diseaseKeys, diseaseColors } from '../../utils/constants';
 
 const DiseaseCarousel = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('home');
   const [activeDisease, setActiveDisease] = useState('vasc');
   const [autoRotate, setAutoRotate] = useState(true);
   const [hovered, setHovered] = useState(false);

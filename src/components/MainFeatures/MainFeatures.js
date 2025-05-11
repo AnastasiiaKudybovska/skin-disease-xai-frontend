@@ -11,7 +11,7 @@ import {
 } from '@mui/icons-material';
 
 const MainFeatures = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('home');
 
   const features = [
     {
@@ -56,10 +56,11 @@ const MainFeatures = () => {
         <Box sx={{
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 mt: { xs: 2, sm: 0 }, ml: { xs: 0, sm: 2 },    flexWrap: 'wrap',
+                color: 'var(--dark-text-color)'
          }}>
             <Box component="img" src="/images/logo_light.png" alt="Logo" sx={{ height: { xs: 80, md: 90 }, mr: 2 }} />
             <Box component="span" sx={{ color: 'var(--primary-color)', fontWeight: 400, fontFamily: '"Frank Ruhl Libre", serif' }}>Skin</Box>
-            <Box component="span" sx={{ color: 'var(--dark-bg-color)', fontWeight: 700, fontFamily: '"Frank Ruhl Libre", serif' }}>Insight</Box>
+            <Box component="span" sx={{ color: 'var(--dark-text-color)', fontWeight: 700, fontFamily: '"Frank Ruhl Libre", serif' }}>Insight</Box>
             <Box component="span" sx={{ color: 'var(--secondary-color)', fontWeight: 600, fontFamily: '"Frank Ruhl Libre", serif', ml: 1.4}}>AI</Box>
             ?
         </Box>

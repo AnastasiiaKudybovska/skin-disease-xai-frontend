@@ -1,0 +1,14 @@
+{
+  "default_error": "Something went wrong. Please try again.",
+  "unknown_error": "Unknown error occurred",
+  "login_success": "Logged in successfully!",
+  "registration_success": "Registration completed successfully!",
+  "logout_success": "Logged out successfully",
+  "login_failed": "Login failed. Check your credentials.",
+  "registration_failed": "Registration failed.",
+  "email_exists": "Email already registered",
+  "email_not_registered": "Email not registered",
+  "invalid_credentials": "Invalid email or password",
+  "network_error": "Network error. Check your connection.",
+  "invalid_token": "Invalid token. Please try again"
+}

@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const InstructionSteps = () => {
   const theme = useTheme();
-  const { t } = useTranslation();
+  const { t } = useTranslation('home');
   const [activeStep, setActiveStep] = useState(0);
 
   const stepImages = [
