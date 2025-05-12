@@ -1,4 +1,4 @@
-import { Box, Typography, Button, useTheme, useMediaQuery } from '@mui/material';
+import { Box, Typography, Button, useTheme, useMediaQuery, Switch, FormControlLabel } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
@@ -11,12 +11,15 @@ const XAIExplanationView = ({ explanation, onBack }) => {
   const diseaseLabels = t('diseaseLabels', { returnObjects: true });
 
   const theme = useTheme();
-
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  
   const [imageUrl, setImageUrl] = useState(null);
+  const [showHeatmap, setShowHeatmap] = useState(false);
+  const [currentImageId, setCurrentImageId] = useState(null);
 
   const firstExplanation = explanation.explanation?.explanations?.explanations?.[0];
   const overlayImageId = firstExplanation?.overlay_image_id;
+  const heatmapImageId = firstExplanation?.heatmap_image_id;
   const method = firstExplanation?.method 
     ? firstExplanation.method.charAt(0).toUpperCase() + firstExplanation.method.slice(1).toLowerCase()
     : '';
@@ -24,9 +27,15 @@ const XAIExplanationView = ({ explanation, onBack }) => {
   const predictedProbs = explanation.explanation?.predicted_probs;
 
   useEffect(() => {
+    setCurrentImageId(showHeatmap ? heatmapImageId : overlayImageId);
+  }, [showHeatmap, overlayImageId, heatmapImageId]);
+
+  useEffect(() => {
     const loadImage = async () => {
-      const url = await ImageService.getImage(overlayImageId, isAuthenticated);
-      setImageUrl(url);
+      if (currentImageId) {
+        const url = await ImageService.getImage(currentImageId, isAuthenticated);
+        setImageUrl(url);
+      }
     };
 
     loadImage();
@@ -36,7 +45,11 @@ const XAIExplanationView = ({ explanation, onBack }) => {
         ImageService.revokeImageUrl(imageUrl);
       }
     };
-  }, [overlayImageId, isAuthenticated]);
+  }, [currentImageId, isAuthenticated]);
+
+  const handleToggleChange = (event) => {
+    setShowHeatmap(event.target.checked);
+  };
 
   const maxProbability = predictedProbs 
     ? (Math.max(...predictedProbs) * 100).toFixed(2)
@@ -67,12 +80,12 @@ const XAIExplanationView = ({ explanation, onBack }) => {
             color: 'var(--dark-text-color)'
           }}
         >
-          {t('xaiMethods.explanationTitle',)} { method }
+          {t('xaiMethods.explanationTitle')} { method }
         </Typography>
 
-     <Box sx={{
+        <Box sx={{
           flex: 1,
-          mb: 3,
+          mb: 1,
           borderRadius: '8px',
           overflow: 'hidden',
           position: 'relative',
@@ -101,26 +114,72 @@ const XAIExplanationView = ({ explanation, onBack }) => {
           )}
         </Box>
 
+     {heatmapImageId && overlayImageId && (
+      <Box sx={{ 
+        mb: 3,
+        display: 'flex',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        borderRadius: '12px',
+        mr: 4,
+      }}>
+        <Switch
+          checked={showHeatmap}
+          onChange={handleToggleChange}
+          sx={{
+            '& .MuiSwitch-switchBase': {
+              position: 'absolute',
+              left: 0,
+              color: 'var(--grey-color)',
+              '& + .MuiSwitch-track': {
+                  backgroundColor: 'var(--grey-color)'
+                },
+              '&.Mui-checked': {
+                color: 'var(--primary-color)',
+                '& + .MuiSwitch-track': {
+                  backgroundColor: 'var(--primary-color)'
+                }
+              }
+            },
+            '& .MuiSwitch-track': {
+              backgroundColor: 'var(--light-grey)'
+            }
+          }}
+        />
+        
+        <Typography 
+          variant="body2" 
+          sx={{
+            fontWeight: 400,
+            color: showHeatmap ? 'var(--primary-color)' : 'var(--grey-color)',
+            fontFamily: '"Inter", sans-serif',
+            transition: 'all 0.3s ease'
+          }}
+        >
+         {firstExplanation.method === "anchor" ? `${t('xaiMethods.anchorDescLongToggle')}` : `${t('xaiMethods.showHeatmap')}`} 
+        </Typography>
+      </Box>
+    )}
+
         {/* Explanation Details */}
         <Box sx={{ mb: 3 }}>
-          <Typography variant="h6" sx={{  mb: 2, fontFamily: '"Inter", sans-serif', fontWeight: 600 }}>
+          <Typography variant="h6" sx={{ mb: 2, fontFamily: '"Inter", sans-serif', fontWeight: 600 }}>
             {t('xaiMethods.predictionDetails')}
           </Typography>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-            <Typography variant="body1" sx={{  fontWeight: 500, fontFamily: '"Inter", sans-serif', }}>
+            <Typography variant="body1" sx={{ fontWeight: 500, fontFamily: '"Inter", sans-serif' }}>
               {t('xaiMethods.predictedClass')}:
             </Typography>
-            <Typography variant="body1" sx={{ fontFamily: '"Inter", sans-serif', }}>
-            {diseaseLabels[predictedClass] || predictedClass}
-              
+            <Typography variant="body1" sx={{ fontFamily: '"Inter", sans-serif' }}>
+              {diseaseLabels[predictedClass] || predictedClass}
             </Typography>
           </Box>
           {maxProbability && (
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-            <Typography variant="body1" sx={{  fontWeight: 500, fontFamily: '"Inter", sans-serif', }}>
+              <Typography variant="body1" sx={{ fontWeight: 500, fontFamily: '"Inter", sans-serif' }}>
                 {t('xaiMethods.confidence')}:
               </Typography>
-            <Typography variant="body1" sx={{  fontWeight: 500, fontFamily: '"Inter", sans-serif', color: 'var(--primary-color)' }}>
+              <Typography variant="body1" sx={{ fontWeight: 500, fontFamily: '"Inter", sans-serif', color: 'var(--primary-color)' }}>
                 {maxProbability}%
               </Typography>
             </Box>
@@ -128,9 +187,8 @@ const XAIExplanationView = ({ explanation, onBack }) => {
         </Box>
 
         {firstExplanation?.method && (
-          <Box sx={{ mb:2, p: 2, backgroundColor: 'var(--white-color)', borderRadius: '8px'}}>
-
-          <Typography variant="body2" sx={{color: "var(--grey-text-color)", fontWeight: 600, fontFamily: '"Raleway", serif',}}>
+          <Box sx={{ mb: 2, p: 2, backgroundColor: 'var(--white-color)', borderRadius: '8px' }}>
+            <Typography variant="body2" sx={{ color: "var(--grey-text-color)", fontWeight: 600, fontFamily: '"Raleway", serif' }}>
               {t(`xaiMethods.${firstExplanation.method}DescLong`, 
                  t('xaiMethods.defaultDesc'))}
             </Typography>

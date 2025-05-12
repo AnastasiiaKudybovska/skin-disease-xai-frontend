@@ -64,13 +64,17 @@
     "predictedClass": "Predicted disease",
     "confidence": "Confidence",
     "backToMethods": "Back to Methods",
-    "gradcamDescLong": "Grad-CAM highlights the areas that most influenced the AI’s decision by using gradient information from the final convolutional layer.",
-    "limeDescLong": "LIME explains why the AI made a specific prediction by intentionally altering parts of the image and building a simple model to show which areas had the most impact on the decision.",
-    "shapDescLong": "SHAP estimates the contribution of each pixel to the model's prediction based on game theory.",
+    "gradcamDescLong": "Grad-CAM (Gradient-weighted Class Activation Mapping) highlights the areas that most influenced the AI’s decision by using gradient information from the final convolutional layer.",
+    "limeDescLong": "LIME (Local Interpretable Model-agnostic Explanations) explains why the AI made a specific prediction by intentionally altering parts of the image and building a simple model to show which areas had the most impact on the decision.",
+    "shapDescLong": "SHAP (SHapley Additive exPlanations) estimates the contribution of each pixel to the model's prediction based on game theory.",
     "anchorDescLong": "Anchor identifies the smallest parts of the image that independently ensure a stable prediction.",
+    "anchorDescLongToggle": "Show segments",
     "igDescLong": "Integrated Gradients show how the prediction changes as the input transitions from a baseline to the actual image.",
     "requestError": "An error occurred while processing the request. Please try again later.",
-    "noImageError": "No image was uploaded. Please select a file before proceeding."
+    "noImageError": "No image was uploaded. Please select a file before proceeding.",
+    "showHeatmap": "Show importance heatmap",
+    "showOverlay": "Show explanations",
+    "waiting": "Please wait. Explanation processing may take a few minutes..."
   }
   
 }

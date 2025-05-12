@@ -23,7 +23,7 @@ const PrimaryRadio = styled(Radio)(({ theme }) => ({
 
 const XAIMethodSelector = ({ onMethodSelect, image, historyId }) => {
   const { t } = useTranslation('diagnostic');
-  const { showError } = useStyledSnackbar();
+  const { showError, showWarning } = useStyledSnackbar();
   const [selectedMethod, setSelectedMethod] = useState('gradcam');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -69,6 +69,7 @@ const XAIMethodSelector = ({ onMethodSelect, image, historyId }) => {
     }
 
     setIsLoading(true);
+    showWarning(t('xaiMethods.waiting'))
     setError(null);
     
     try {
@@ -182,7 +183,7 @@ const XAIMethodSelector = ({ onMethodSelect, image, historyId }) => {
         </RadioGroup>
 
         {error && (
-          <Typography color="error" sx={{ mb: 2 }}>
+           <Typography variant="body2" sx={{ color: "var(--error-color)", fontWeight: 600, fontFamily: '"Raleway", serif' }}>
             {error}
           </Typography>
         )}
@@ -214,7 +215,12 @@ const XAIMethodSelector = ({ onMethodSelect, image, historyId }) => {
           }}
         >
           {isLoading ? (
-            <CircularProgress size={24} sx={{ color: 'var(--primary-color)' }} />
+              <Box >
+                <CircularProgress size={24} sx={{ color: 'var(--primary-color)' }} />
+                <Typography variant="body2" sx={{ color: "var(--grey-text-color)", fontWeight: 600, fontFamily: '"Raleway", serif' }}>
+                  {t('xaiMethods.waiting')}
+                </Typography>
+              </Box>
           ) : (
             t('xaiMethods.generateExplanation')
           )}
