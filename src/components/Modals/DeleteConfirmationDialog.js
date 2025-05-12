@@ -1,9 +1,23 @@
-import { CircularProgress, Dialog, DialogTitle, DialogContent, DialogActions, Typography, Button, Box, IconButton } from '@mui/material';
+import { 
+  CircularProgress, 
+  Dialog, 
+  DialogTitle, 
+  DialogContent, 
+  DialogActions, 
+  Typography, 
+  Button, 
+  Box, 
+  IconButton 
+} from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/material/styles';
 import CloseIcon from '@mui/icons-material/Close';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const StyledDialog = styled(Dialog)(({ theme }) => ({
+  '& .MuiBackdrop-root': {
+    backdropFilter: 'blur(4px)',
+  },
   '& .MuiPaper-root': {
     borderRadius: '24px',
     padding: '36px',
@@ -12,6 +26,7 @@ const StyledDialog = styled(Dialog)(({ theme }) => ({
     background: 'white',
     boxShadow: '0px 10px 30px rgba(0, 0, 0, 0.15)',
     border: `1px solid var(--grey-color)`,
+    overflow: 'hidden',
   },
 }));
 
@@ -67,67 +82,116 @@ const DeleteConfirmationDialog = ({
   const { t } = useTranslation('profile');
 
   return (
-    <StyledDialog open={open} onClose={onClose}>
-      <Box component="div">
-        <DialogHeader>
-          {t('confirm_delete')}
-          <IconButton
-            edge="end"
-            color="inherit"
-            onClick={onClose}
-            sx={{
-              position: 'absolute',
-              right: -18,
-              top: -32
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-        </DialogHeader>
+    <AnimatePresence>
+      {open && (
+        <StyledDialog 
+          open={open} 
+          onClose={onClose}
+          TransitionComponent={motion.div}
+          transition={{
+            duration: 0.3,
+            ease: "easeInOut"
+          }}
+          PaperProps={{
+            component: motion.div,
+            initial: { opacity: 0, y: 250 },
+            animate: { opacity: 1, y: 200 },
+            exit: { opacity: 0, y: 250 }
+          }}
+        >
+          <Box component="div">
+            <DialogHeader>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.1 }}
+              >
+                {t('confirm_delete')}
+              </motion.div>
+              <IconButton
+                edge="end"
+                color="inherit"
+                onClick={onClose}
+                sx={{
+                  position: 'absolute',
+                  right: -12,
+                  top: -28
+                }}
+                component={motion.button}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <CloseIcon />
+              </IconButton>
+            </DialogHeader>
 
-        <DialogBody>
-          <Typography variant="body1" sx={{ fontFamily: '"Raleway", sans-serif' }}>
-            {t('delete_warning')}
-          </Typography>
-        </DialogBody>
+            <DialogBody>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.2 }}
+              >
+                <Typography variant="body1" sx={{ fontFamily: '"Raleway", sans-serif' }}>
+                  {t('delete_warning')}
+                </Typography>
+              </motion.div>
+            </DialogBody>
 
-        <DialogFooter sx={{ alignItems: 'center', justifyContent: 'center' }}>
-          <ActionButton
-            onClick={onClose}
-            color="inherit"
-            sx={{
-              mr: 2,
-              color: 'var(--primary-color)',
-              borderColor: 'var(--primary-color)',
-              '&:hover': {
-                bgcolor: 'var(--primary-color)',
-                color: 'var(--white-color)',
-              },
-            }}
-          >
-            {t('cancel')}
-          </ActionButton>
+            <DialogFooter sx={{ alignItems: 'center', justifyContent: 'center' }}>
+              <ActionButton
+                onClick={onClose}
+                color="inherit"
+                sx={{
+                  mr: 2,
+                  color: 'var(--primary-color)',
+                  borderColor: 'var(--primary-color)',
+                  '&:hover': {
+                    bgcolor: 'var(--primary-color)',
+                    color: 'var(--white-color)',
+                  },
+                }}
+                component={motion.button}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {t('cancel')}
+              </ActionButton>
 
-          <ActionButton
-            onClick={onConfirm}
-            color="error"
-            disabled={loading}
-            startIcon={loading && <CircularProgress size={20} sx={{color: 'var(--white-color)'}} />}
-            sx={{
-              color: 'var(--white-color)',
-              bgcolor: 'var(--error-color)',
-              borderColor: 'var(--error-color)',
-              '&:hover': {
-                bgcolor: 'var(--dark-error-color)',
-                color: 'var(--white-color)',
-              },
-            }}
-          >
-            {t('confirm')}
-          </ActionButton>
-        </DialogFooter>
-      </Box>
-    </StyledDialog>
+              <ActionButton
+                onClick={onConfirm}
+                color="error"
+                disabled={loading}
+                startIcon={loading && (
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                  >
+                    <CircularProgress size={20} sx={{color: 'var(--white-color)'}} />
+                  </motion.div>
+                )}
+                sx={{
+                  color: 'var(--white-color)',
+                  bgcolor: 'var(--error-color)',
+                  borderColor: 'var(--error-color)',
+                  '&:hover': {
+                    bgcolor: 'var(--dark-error-color)',
+                    color: 'var(--white-color)',
+                  },
+                }}
+                component={motion.button}
+                whileHover={{ 
+                  scale: 1.05,
+                  boxShadow: '0px 8px 20px rgba(244, 67, 54, 0.3)'
+                }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {t('confirm')}
+              </ActionButton>
+            </DialogFooter>
+          </Box>
+        </StyledDialog>
+      )}
+    </AnimatePresence>
   );
 };
 
