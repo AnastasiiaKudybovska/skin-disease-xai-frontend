@@ -48,6 +48,29 @@
     "suggestion2": "Make sure the focus is clear",
     "suggestion3": "Capture the affected area closer",
     "tryAgainButton": "Try Again"
+  },
+  "xaiMethods": {
+    "title": "Explainable AI Method",
+    "subtitle": "Select a method to understand why this diagnosis was made",
+    "generateExplanation": "Generate Explanation",
+    "gradcamDesc": "Visualizes which image regions influenced the decision using gradients.",
+    "limeDesc": "Explains predictions by creating local interpretable models.",
+    "shapDesc": "Shows how much each part of the image contributed to the prediction using game theory concepts.",
+    "anchorDesc": "Identifies important regions that, if removed, would change the model’s decision.",
+    "igDesc": "Determines which pixels had the most impact by analyzing gradient changes.",
+    "explanationTitle": "Explanation",
+    "noExplanationImage": "Explanation visualization not available",
+    "predictionDetails": "Classification Details",
+    "predictedClass": "Predicted disease",
+    "confidence": "Confidence",
+    "backToMethods": "Back to Methods",
+    "gradcamDescLong": "Grad-CAM highlights the areas that most influenced the AI’s decision by using gradient information from the final convolutional layer.",
+    "limeDescLong": "LIME explains why the AI made a specific prediction by intentionally altering parts of the image and building a simple model to show which areas had the most impact on the decision.",
+    "shapDescLong": "SHAP estimates the contribution of each pixel to the model's prediction based on game theory.",
+    "anchorDescLong": "Anchor identifies the smallest parts of the image that independently ensure a stable prediction.",
+    "igDescLong": "Integrated Gradients show how the prediction changes as the input transitions from a baseline to the actual image.",
+    "requestError": "An error occurred while processing the request. Please try again later.",
+    "noImageError": "No image was uploaded. Please select a file before proceeding."
   }
   
 }

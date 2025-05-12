@@ -111,7 +111,7 @@ const DiagnosisResults = ({ results, isMobile }) => {
 
         <Box sx={{ mt: 4, p: 2, backgroundColor: 'var(--white-color)', borderRadius: '8px'}}>
           <Typography variant="body2" sx={{color: "var(--grey-text-color)", fontFamily: '"Raleway", serif',}}>
-            <strong>Note:</strong> This analysis is for informational purposes only and should not replace professional medical advice.
+            <strong>{t('analysisStep.note')}: </strong>{ t('analysisStep.disclaimer')}
           </Typography>
         </Box>
       </Box>

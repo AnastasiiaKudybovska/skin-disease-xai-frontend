@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import ImageUpload from '../components/Diagnostic/ImageUpload';
 import AnalysisStep from '../components/Diagnostic/AnalysisStep/AnalysisStep';
-import ResultsDisplay from '../components/Diagnostic/ResultsDisplay';
+import ResultsXAIStep from '../components/Diagnostic/ResultsXAIStep/ResultsXAIStep';
 import DiagnosticStepper from '../components/Diagnostic/DiagnosticStepper';
 
 const DiagnosticPage = () => {
@@ -41,7 +41,7 @@ const DiagnosticPage = () => {
     },
     { 
       label: t('steps.results'), 
-      component: <ResultsDisplay results={analysisResults} image={image} /> 
+      component: <ResultsXAIStep results={analysisResults} image={image} handleBack={handleBack} /> 
     }
   ];
 
@@ -115,7 +115,7 @@ const DiagnosticPage = () => {
           )}
           {activeStep === steps.length - 1 && (
             <Button onClick={handleReset} variant="contained"
-                sx={{ mt: 4, px: 4, borderRadius: '24px',  
+                sx={{ mt: 4, px: 4, borderRadius: '24px',  minWidth: '150px',
                 fontWeight: 500, fontFamily: '"Inter", serif', textTransform: 'none',
                 bgcolor: 'var(--primary-color)',  color: 'var(--white-color)',
                 boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)', transition: 'all 0.3s ease', 
