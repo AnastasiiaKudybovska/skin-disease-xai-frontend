@@ -61,7 +61,8 @@ function App() {
               } 
             />
           </Routes>
-          {(pathname === '/login' || pathname === '/signup' || pathname === '/profile') ? null : <Footer />}
+          {(pathname === '/login' || pathname === '/signup' || pathname === '/profile'
+             || pathname === '/diagnostics') ? null : <Footer />}
         </SnackbarProvider>
       </ThemeProvider>
     </I18nextProvider>
