@@ -1,4 +1,4 @@
-import { Box, Typography, Button, useTheme, useMediaQuery, Switch, FormControlLabel } from '@mui/material';
+import { Box, Typography, Button, useTheme, useMediaQuery, Switch, Slider } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
@@ -14,22 +14,27 @@ const XAIExplanationView = ({ explanation, onBack }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   
   const [imageUrl, setImageUrl] = useState(null);
+  const [overlayUrl, setOverlayUrl] = useState(null);
   const [showHeatmap, setShowHeatmap] = useState(false);
   const [currentImageId, setCurrentImageId] = useState(null);
+  const [opacity, setOpacity] = useState(50);
 
   const firstExplanation = explanation.explanation?.explanations?.explanations?.[0];
   const overlayImageId = firstExplanation?.overlay_image_id;
   const heatmapImageId = firstExplanation?.heatmap_image_id;
   const method = firstExplanation?.method 
-    ? firstExplanation.method.charAt(0).toUpperCase() + firstExplanation.method.slice(1).toLowerCase()
+    ? firstExplanation.method.toLowerCase()
     : '';
   const predictedClass = explanation.explanation?.predicted_class;
   const predictedProbs = explanation.explanation?.predicted_probs;
 
-  useEffect(() => {
-    setCurrentImageId(showHeatmap ? heatmapImageId : overlayImageId);
-  }, [showHeatmap, overlayImageId, heatmapImageId]);
+  const isSHAP = method === 'shap';
 
+  useEffect(() => {
+    setCurrentImageId(isSHAP ? heatmapImageId : (showHeatmap ? heatmapImageId : overlayImageId));
+  }, [showHeatmap, overlayImageId, heatmapImageId, isSHAP]);
+
+  // Load main image
   useEffect(() => {
     const loadImage = async () => {
       if (currentImageId) {
@@ -47,8 +52,30 @@ const XAIExplanationView = ({ explanation, onBack }) => {
     };
   }, [currentImageId, isAuthenticated]);
 
+  // Load overlay image for SHAP
+  useEffect(() => {
+    const loadOverlayImage = async () => {
+      if (isSHAP && overlayImageId) {
+        const url = await ImageService.getImage(overlayImageId, isAuthenticated);
+        setOverlayUrl(url);
+      }
+    };
+
+    loadOverlayImage();
+
+    return () => {
+      if (overlayUrl) {
+        ImageService.revokeImageUrl(overlayUrl);
+      }
+    };
+  }, [isSHAP, overlayImageId, isAuthenticated]);
+
   const handleToggleChange = (event) => {
     setShowHeatmap(event.target.checked);
+  };
+
+  const handleOpacityChange = (event, newValue) => {
+    setOpacity(newValue);
   };
 
   const maxProbability = predictedProbs 
@@ -80,7 +107,7 @@ const XAIExplanationView = ({ explanation, onBack }) => {
             color: 'var(--dark-text-color)'
           }}
         >
-          {t('xaiMethods.explanationTitle')} { method }
+          {t('xaiMethods.explanationTitle')} {method.toUpperCase()}
         </Typography>
 
         <Box sx={{
@@ -96,17 +123,37 @@ const XAIExplanationView = ({ explanation, onBack }) => {
           justifyContent: 'center'
         }}>
           {imageUrl ? (
-            <img 
-              src={imageUrl}
-              alt="XAI Explanation"
-              style={{
-                width: '100%',
-                height: 'auto',
-                maxHeight: '400px',
-                objectFit: 'contain'
-              }}
-              onError={() => setImageUrl(null)}
-            />
+            <>
+              {isSHAP && overlayUrl && (
+                <img 
+                  src={overlayUrl}
+                  alt="Original Image"
+                  style={{
+                    width: '100%',
+                    height: 'auto',
+                    maxHeight: '400px',
+                    objectFit: 'contain',
+                    position: 'absolute',
+                    zIndex: 1
+                  }}
+                  onError={() => setOverlayUrl(null)}
+                />
+              )}
+              <img 
+                src={imageUrl}
+                alt="XAI Explanation"
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  maxHeight: '400px',
+                  objectFit: 'contain',
+                  position: 'relative',
+                  zIndex: 2,
+                  opacity: isSHAP ? `${opacity}%` : '100%'
+                }}
+                onError={() => setImageUrl(null)}
+              />
+            </>
           ) : (
             <Typography color="text.secondary">
               {t('xaiMethods.noExplanationImage')}
@@ -114,54 +161,80 @@ const XAIExplanationView = ({ explanation, onBack }) => {
           )}
         </Box>
 
-     {heatmapImageId && overlayImageId && (
-      <Box sx={{ 
-        mb: 3,
-        display: 'flex',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        borderRadius: '12px',
-        mr: 4,
-      }}>
-        <Switch
-          checked={showHeatmap}
-          onChange={handleToggleChange}
-          sx={{
-            '& .MuiSwitch-switchBase': {
-              position: 'absolute',
-              left: 0,
-              color: 'var(--grey-color)',
-              '& + .MuiSwitch-track': {
-                  backgroundColor: 'var(--grey-color)'
-                },
-              '&.Mui-checked': {
+        {/* Opacity slider for SHAP */}
+        {isSHAP && (
+          <Box sx={{ width: '80%', mx: 'auto', mt: 2, mb: 3 }}>
+            <Typography variant="body2" gutterBottom sx={{ color: 'var(--dark-text-color)',
+                fontFamily: '"Inter", sans-serif', fontWeight: 600,}}>
+              {t('xaiMethods.adjustHeatmapOpacity')}: {opacity}%
+            </Typography>
+            <Slider
+              value={opacity}
+              onChange={handleOpacityChange}
+              aria-labelledby="opacity-slider"
+              min={10}
+              max={100}
+              sx={{
                 color: 'var(--primary-color)',
-                '& + .MuiSwitch-track': {
-                  backgroundColor: 'var(--primary-color)'
+                '& .MuiSlider-thumb': {
+                  '&:hover, &.Mui-focusVisible': {
+                    boxShadow: '0 0 0 8px rgba(25, 118, 210, 0.16)'
+                  }
                 }
-              }
-            },
-            '& .MuiSwitch-track': {
-              backgroundColor: 'var(--light-grey)'
-            }
-          }}
-        />
-        
-        <Typography 
-          variant="body2" 
-          sx={{
-            fontWeight: 400,
-            color: showHeatmap ? 'var(--primary-color)' : 'var(--grey-color)',
-            fontFamily: '"Inter", sans-serif',
-            transition: 'all 0.3s ease'
-          }}
-        >
-         {firstExplanation.method === "anchor" ? `${t('xaiMethods.anchorDescLongToggle')}` : `${t('xaiMethods.showHeatmap')}`} 
-        </Typography>
-      </Box>
-    )}
+              }}
+            />
+          </Box>
+        )}
 
-        {/* Explanation Details */}
+        {/* Toggle switch for non-SHAP methods */}
+        {!isSHAP && heatmapImageId && overlayImageId && (
+          <Box sx={{ 
+            mb: 3,
+            display: 'flex',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            borderRadius: '12px',
+            mr: 4,
+          }}>
+            <Switch
+              checked={showHeatmap}
+              onChange={handleToggleChange}
+              sx={{
+                '& .MuiSwitch-switchBase': {
+                  position: 'absolute',
+                  left: 0,
+                  color: 'var(--grey-color)',
+                  '& + .MuiSwitch-track': {
+                      backgroundColor: 'var(--grey-color)'
+                    },
+                  '&.Mui-checked': {
+                    color: 'var(--primary-color)',
+                    '& + .MuiSwitch-track': {
+                      backgroundColor: 'var(--primary-color)'
+                    }
+                  }
+                },
+                '& .MuiSwitch-track': {
+                  backgroundColor: 'var(--light-grey)'
+                }
+              }}
+            />
+            
+            <Typography 
+              variant="body2" 
+              sx={{
+                fontWeight: 400,
+                color: showHeatmap ? 'var(--primary-color)' : 'var(--grey-color)',
+                fontFamily: '"Inter", sans-serif',
+                transition: 'all 0.3s ease'
+              }}
+            >
+              {t('xaiMethods.showHeatmap')}
+            </Typography>
+          </Box>
+        )}
+
+        {/* Prediction details */}
         <Box sx={{ mb: 3 }}>
           <Typography variant="h6" sx={{ mb: 2, fontFamily: '"Inter", sans-serif', fontWeight: 600 }}>
             {t('xaiMethods.predictionDetails')}
@@ -186,6 +259,7 @@ const XAIExplanationView = ({ explanation, onBack }) => {
           )}
         </Box>
 
+        {/* Method description */}
         {firstExplanation?.method && (
           <Box sx={{ mb: 2, p: 2, backgroundColor: 'var(--white-color)', borderRadius: '8px' }}>
             <Typography variant="body2" sx={{ color: "var(--grey-text-color)", fontWeight: 600, fontFamily: '"Raleway", serif' }}>
@@ -195,6 +269,7 @@ const XAIExplanationView = ({ explanation, onBack }) => {
           </Box>
         )}
 
+        {/* Back button */}
         <Button
           variant="outlined"
           onClick={onBack}

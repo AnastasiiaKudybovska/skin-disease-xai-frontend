@@ -74,7 +74,8 @@
     "noImageError": "No image was uploaded. Please select a file before proceeding.",
     "showHeatmap": "Show importance heatmap",
     "showOverlay": "Show explanations",
-    "waiting": "Please wait. Explanation processing may take a few minutes..."
+    "waiting": "Please wait. Explanation processing may take a few minutes...",
+    "adjustHeatmapOpacity": "Adjust heatmap opacity"
   }
   
 }
