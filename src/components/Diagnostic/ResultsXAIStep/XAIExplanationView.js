@@ -30,6 +30,14 @@ const XAIExplanationView = ({ explanation, onBack }) => {
 
   const isSHAP = method === 'shap';
 
+ const methodsData = [
+  { id: 'lime', title: 'LIME' },
+  { id: 'shap', title: 'SHAP' },
+  { id: 'gradcam', title: 'Grad-CAM' },
+  { id: 'integrated gradients', title: `${t('xaiMethods.igTitle')}` },
+  { id: 'anchor', title: 'Anchor' },
+];
+
   useEffect(() => {
     setCurrentImageId(isSHAP ? heatmapImageId : (showHeatmap ? heatmapImageId : overlayImageId));
   }, [showHeatmap, overlayImageId, heatmapImageId, isSHAP]);
@@ -107,7 +115,8 @@ const XAIExplanationView = ({ explanation, onBack }) => {
             color: 'var(--dark-text-color)'
           }}
         >
-          {t('xaiMethods.explanationTitle')} {method.toUpperCase()}
+          {firstExplanation.method === "integrated gradients" ? "": `${t('xaiMethods.explanationTitle')} `} 
+          {methodsData.find(m => m.id === method)?.title || method.toUpperCase()}
         </Typography>
 
         <Box sx={{
@@ -229,7 +238,9 @@ const XAIExplanationView = ({ explanation, onBack }) => {
                 transition: 'all 0.3s ease'
               }}
             >
-              {t('xaiMethods.showHeatmap')}
+              {firstExplanation.method === "anchor" 
+                ? `${t('xaiMethods.anchorDescLongToggle')}` 
+                : firstExplanation.method === "integrated gradients" ?  `${t('xaiMethods.igDescLongToggle')}`  :`${t('xaiMethods.showHeatmap')}`} 
             </Typography>
           </Box>
         )}
@@ -264,7 +275,7 @@ const XAIExplanationView = ({ explanation, onBack }) => {
           <Box sx={{ mb: 2, p: 2, backgroundColor: 'var(--white-color)', borderRadius: '8px' }}>
             <Typography variant="body2" sx={{ color: "var(--grey-text-color)", fontWeight: 600, fontFamily: '"Raleway", serif' }}>
               {t(`xaiMethods.${firstExplanation.method}DescLong`, 
-                 t('xaiMethods.defaultDesc'))}
+                 t('xaiMethods.igDescLong'))}
             </Typography>
           </Box>
         )}
