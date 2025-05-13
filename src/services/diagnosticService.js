@@ -34,9 +34,10 @@ export const diagnosticService = {
     try {
       const formData = new FormData();
       formData.append('file', imageFile);
-      if (historyId) {
+      console.log(historyId)
+      if (historyId.historyId !== null) {
         formData.append('history_id', historyId.historyId.toString() );
-      }
+      } 
       if (token === null) {
         token = localStorage.getItem('access_token');
       }
