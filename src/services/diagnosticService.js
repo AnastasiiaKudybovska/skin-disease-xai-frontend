@@ -59,33 +59,5 @@ export const diagnosticService = {
       throw handleApiError(error);
     }
   },
-
-  getGradCAMExplanation: async (imageFile, historyId = null, token = null) => {
-    try {
-      if (token === null) {
-        token = localStorage.getItem('access_token');
-      }
-      const formData = new FormData();
-      formData.append('file', imageFile);
-      if (historyId) {
-        formData.append('history_id', historyId);
-      }
-
-      const headers = {};
-      if (token) {
-        headers['Authorization'] = `Bearer ${token}`;
-      }
-
-      const response = await axios.post(`${API_URL}/api/xai/gradcam`, formData, {
-        headers: {
-          ...headers,
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-
-      return response.data;
-    } catch (error) {
-      throw handleApiError(error);
-    }
-  },
+  
 };

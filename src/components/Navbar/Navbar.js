@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 import { AppBar, Toolbar, Typography, Box, IconButton, Menu, MenuItem, useMediaQuery, useTheme, Avatar, Link } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import LanguageIcon from '@mui/icons-material/Language';
@@ -36,6 +37,29 @@ const Navbar = () => {
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
+
+    const navigate = useNavigate();
+
+ const handleNavClick = (path) => {
+  if (path.startsWith('#')) {
+    const hash = path.substring(1);
+    
+    // Якщо ми вже на головній сторінці
+    if (window.location.pathname === '/') {
+      const element = document.getElementById(hash);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } 
+    else {
+      navigate('/', {
+        state: { scrollTo: hash }, // Передаємо хеш у стан навігації
+      });
+    }
+  } else {
+    navigate(path);
+  }
+};
 
   const handleLogout = () => {
     logout();
@@ -92,20 +116,25 @@ const Navbar = () => {
 
         {!isMobile ? (
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            {navItems.map((item) => (
-              <Typography key={item.path} component="a"
-                href={item.path}
-                sx={{ 
-                  mx: 1, color: 'var(--white-color)', textDecoration: 'none', cursor: 'pointer', 
-                  fontFamily: "Raleway", fontSize: {md:'0.9rem', lg: '1rem'},
-                  '&:hover': {
-                    color: 'var(--grey-color)'
-                  }
-                }}
-              >
-                {item.name}
-              </Typography>
-            ))}
+         {navItems.map((item) => (
+        <Typography 
+          key={item.path}
+          onClick={() => handleNavClick(item.path)}
+          sx={{ 
+            mx: 1, 
+            color: 'var(--white-color)', 
+            textDecoration: 'none', 
+            cursor: 'pointer', 
+            fontFamily: "Raleway", 
+            fontSize: { md: '0.9rem', lg: '1rem' },
+            '&:hover': {
+              color: 'var(--grey-color)'
+            }
+          }}
+        >
+          {item.name}
+        </Typography>
+      ))}
 
             {isAuthenticated ? (
               <>

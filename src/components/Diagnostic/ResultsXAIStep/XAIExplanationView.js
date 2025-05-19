@@ -120,7 +120,7 @@ const XAIExplanationView = ({ explanation, onBack }) => {
         </Typography>
 
         <Box sx={{
-          flex: 1,
+          flex: 0,
           mb: 1,
           borderRadius: '8px',
           overflow: 'hidden',
