@@ -1,0 +1,51 @@
+{
+  "history": {
+    "title": "Diagnosis History",
+    "authRequired": "Please log in to view diagnosis history",
+    "noHistory": "You don't have any diagnosis history yet",
+    "detailsTitle": "Diagnosis Details",
+    "originalImage": "Original Image",
+    "noImage": "Image not available",
+    "diagnosisDetails": "Diagnosis Details",
+    "predictedClass": "Predicted Class",
+    "confidenceLevel": "Confidence Level",
+    "topDiagnoses": "Probability Distribution",    
+    "date": "Diagnosis Date",
+    "explanationMethods": "Explanation Methods",
+    "notFound": "Diagnosis not found",
+    "backToHistory": "Back to History",
+    "filter": {
+      "all": "All Records"
+    },
+    "deleted_success": "Record deleted successfully",
+    "deleted_all_success": "All history deleted successfully",
+    "delete_error": "Error deleting record. Please try again",
+    "delete_all_error": "Error deleting history. Please try again",
+    "load_error": "Error loading history",
+    "showing_all": "All Records",
+    "showing_filtered": "Filtered",
+    "noFilteredHistory": "No diagnoses match the selected filter",
+    "delete_all": "Delete All"
+  },
+  "diseaseLabels": {
+    "vasc": "Vascular Lesion",
+    "akiec": "Actinic Keratosis",
+    "bcc": "Basal Cell Carcinoma",
+    "nv": "Melanocytic Nevus",
+    "mel": "Melanoma",
+    "df": "Dermatofibroma",
+    "bkl": "Seborrheic Keratosis"
+  },
+  "tryButton": "Run Diagnosis",
+  "cancel": "Cancel",
+  "delete_account": "Delete",
+  "confirm_delete": "Confirm Deletion",
+  "delete_warning": "Are you sure you want to delete this request and all associated information? This action cannot be undone.",
+  "confirm": "Confirm",
+  "xaiMethods": {
+    "generateMissing": "Explainable AI Methods",
+    "generateExplanation": "Generate Explanation",
+    "availableExplanations": "Previously Generated Explanations:"
+  },
+  "deleteHistory": "Delete Record"
+}

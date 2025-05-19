@@ -12,9 +12,11 @@ import Footer from './components/Footer/Footer';
 import DiagnosticPage from './pages/DiagnosticPage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import HistoryPage from './pages/HistoryPage';
 import { SnackbarProvider } from 'notistack';
 import ProfilePage from './pages/ProfilePage';
 import { useAuth } from './hooks/useAuth';
+import HistoryDetailPage from './pages/HistoryDetailPage';
 
 const ProtectedRoute = ({ children }) => {
   const { isAuthenticated } = useAuth();
@@ -60,9 +62,24 @@ function App() {
                 </ProtectedRoute>
               } 
             />
+            <Route 
+              path="/history" 
+              element={
+                <ProtectedRoute>
+                  <HistoryPage />
+                </ProtectedRoute>
+              } 
+            />
+            <Route 
+              path="/history/:id" 
+              element={
+                <ProtectedRoute>
+                  <HistoryDetailPage />
+                </ProtectedRoute>
+              } 
+            />
           </Routes>
-          {(pathname === '/login' || pathname === '/signup' || pathname === '/profile'
-             || pathname === '/diagnostics') ? null : <Footer />}
+          {(pathname === '/') ?  <Footer /> : null}
         </SnackbarProvider>
       </ThemeProvider>
     </I18nextProvider>

@@ -342,6 +342,7 @@ const Profile = () => {
           </Box>
     
           <DeleteConfirmationDialog
+            locale="profile"
             open={openDeleteDialog}
             onClose={() => setOpenDeleteDialog(false)}
             onConfirm={handleDeleteAccount}

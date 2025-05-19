@@ -74,12 +74,13 @@ const ActionButton = styled(Button)(() => ({
 }));
 
 const DeleteConfirmationDialog = ({
+  locale, 
   open,
   onClose,
   onConfirm,
   loading,
 }) => {
-  const { t } = useTranslation('profile');
+  const { t } = useTranslation(locale);
 
   return (
     <AnimatePresence>

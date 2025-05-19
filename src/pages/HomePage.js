@@ -1,4 +1,5 @@
-import React from 'react';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Box } from '@mui/material';
 import MainHero from '../components/MainHero/MainHero';
 import InstructionSteps from '../components/InstructionSteps/InstructionSteps';
@@ -7,6 +8,30 @@ import WarningBlock from '../components/WarningBlock/WarningBlock';
 import DiseasesCarousel from '../components/DiseaseCarousel/DiseaseCarousel';
 
 const HomePage = () => {
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.state?.scrollTo) {
+      const element = document.getElementById(location.state.scrollTo);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+    
+    else if (location.hash) {
+      const hash = location.hash.substring(1);
+      const element = document.getElementById(hash);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  }, [location]);
+
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', mt: 4, minHeight: '92vh' }}>
       <MainHero />
@@ -18,8 +43,6 @@ const HomePage = () => {
       <WarningBlock />
       <DiseasesCarousel />
       
-      {/* Інші секції можна додати тут */}
-
     </Box>
   );
 };

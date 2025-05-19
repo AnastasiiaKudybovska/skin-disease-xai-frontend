@@ -77,7 +77,21 @@
     "showHeatmap": "Show importance heatmap",
     "showOverlay": "Show explanations",
     "waiting": "Please wait. Explanation processing may take a few minutes...",
-    "adjustHeatmapOpacity": "Adjust heatmap opacity"
+    "adjustHeatmapOpacity": "Adjust heatmap opacity",
+    "success": "Explanation created successfully",
+    "heatmapOpacity": "Heatmap opacity",
+    "interpretationTitle": "How to Interpret the Results?",
+    "howToUseTitle": "How to Use This Explanation?",
+    "gradcamInterpretation": "Red, yellow and blue areas indicate regions that strongly support the predicted diagnosis. Pink and purple areas are less important. The intensity shows the contribution of each region to the decision.",
+    "gradcamHowToUse": "Focus on the highlighted areas to understand which features the model considers important. Compare with other methods for comprehensive analysis.",
+    "limeInterpretation": "Areas highlighted in green positively influence the prediction, while red areas contradict it. The intensity shows the strength of influence.",
+    "limeHowToUse": "Examine the highlighted image segments to see which areas were most influential in determining the disease. On the importance heatmap, yellow and red shades positively affected the decision, while purple and blue shades had a negative impact.",
+    "shapInterpretation": "Blue, green areas increase the probability of the predicted class, while red areas decrease it. The slider adjusts the heatmap opacity.",
+    "shapHowToUse": "Adjust the opacity to blend the heatmap with the original image. Compare SHAP values with other methods.",
+    "anchorInterpretation": "Highlighted areas represent the minimal features that indicate this diagnosis. Other areas are less important for this decision.",
+    "anchorHowToUse": "The most important image regions are displayed. You can also examine other image segments that were used to evaluate the most significant areas.",
+    "igInterpretation": "Bright contours indicate the image areas with the greatest influence. The intensity shows the magnitude of contribution.",
+    "igHowToUse": "Switch between gradients and overlays to see different representations of feature importance. Darker areas had less impact on the resulting diagnosis, while brighter areas had more influence."
   }
   
 }

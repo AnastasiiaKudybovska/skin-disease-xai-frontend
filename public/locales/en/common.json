@@ -17,5 +17,10 @@
     "navigation": "Navigation",
     "contact": "Contact Us",
     "copyright": "© 2025 SkinInsight AI. All rights reserved."
-  }
+  },
+  "cancel": "Cancel",
+  "delete_account": "Delete",
+  "confirm_delete": "Confirm history deletion", 
+  "delete_warning": "Are you sure you want to delete all history? This action cannot be undone.",
+  "confirm": "Confirm"
 }
